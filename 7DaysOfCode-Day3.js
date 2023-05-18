@@ -26,26 +26,22 @@ if (question == "specialise") {
 let technologies = []; // Create an empty array
 let continueLearning = true;
 while (continueLearning) {
-    let newTech = prompt("What technology would you like to learn? (max of 5)");
+    let newTech = prompt("What technology would you like to learn? (min of 3)");
     const test = newTech.split(', ');
+    technologies = technologies.concat(test);
 
-    if (test.length + technologies.length > 5) {
-        alert("Too many options inputted. Please start over.");
-        technologies = [];
+    if (technologies.length < 3) {
+        alert(`You listed only ${technologies.length}. You still need to list ${3 - technologies.length} more.`);
     }
-    else {
-        technologies = technologies.concat(test);
-    }
-    if (technologies.length == 5) {
-        continueLearning = false;
-    } else if (technologies.length > 0) {
-        let answer = prompt("Is there any other technology you'd like to learn about? (yes or no)");
+
+    if (technologies.length >= 3) {
+        let answer = prompt(`You listed ${technologies.length}. Is there any other technology you'd like to learn about? (yes or no)`);
         if (answer === "no") {
             continueLearning = false; // Stop the loop if answer is "no"
         }
     }
+
 }
 
 alert("Congratulations on learning these new technologies: \n" + technologies.join("\n"));
-
 
