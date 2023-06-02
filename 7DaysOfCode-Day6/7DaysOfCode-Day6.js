@@ -1,10 +1,15 @@
 alert("Let's go shopping!");
 let productChoice;
-let continueAddingChoice;
+let nextStepChoice;
+let questionRemove;
+let removedProduct;
+let listRemoved;
+let showMyList;
+
 
 do {
     let categoryShoppingList = [[], [], [], [], []];
-    let categories = ["1-Fruits & Veggies:", "2-Dairy & Meat:", "3-Frozen & Shelflife Food:", "4-Bakery & Snacks:", "5-Cleaning:"];
+    let categories = ["1-Fruits & Veggies:", "2-Dairy & Meat:", "3-Frozen & Shelflife Food:", "4-Bakery & Snacks:", "5-Cleaning & Misc:"];
     let continueAdding = true;
 
     while (continueAdding) {
@@ -16,15 +21,25 @@ do {
 
         do {
 
-            continueAddingChoice = prompt("Would you like to add more items to your list?\n\n1-Yes\n2-No");
+            nextStepChoice = Number.parseInt(prompt("What would you like to do now?\n\n1-Add\n2-Remove\n3-Show my list\n4-I'm done!"));
 
-            if (continueAddingChoice != "1" && continueAddingChoice != "2") {
+            if (nextStepChoice > 4) {
                 alert("Please enter a valid number");
-            } else if (continueAddingChoice === "2") {
+            } else if (nextStepChoice === 2) {
+                questionRemove = prompt("What item would you like to remove?");
+
+                let categoryChoice = prompt("What category would you like to remove this item?\nChoose by the number:\n\n" + categories.join("\n"));
+                const categoryNumber = Number.parseInt(categoryChoice);
+                categoryShoppingList[categoryNumber - 1].splice(categories.indexOf(questionRemove), 1);
+
+                console.log(categoryShoppingList);
+            } else if (nextStepChoice === 4) {
                 alert("Let's see your list then");
                 continueAdding = false;
             }
-        } while (continueAddingChoice != "1" && continueAddingChoice != "2")
+
+
+        } while (nextStepChoice > 4)
     }
 
     let myShoppingList = '';
@@ -52,4 +67,4 @@ do {
 
     alert("Here's your shopping list!:\n\n" + myShoppingList);
 
-} while (continueAddingChoice === "1")
+} while (nextStepChoice === "1")
