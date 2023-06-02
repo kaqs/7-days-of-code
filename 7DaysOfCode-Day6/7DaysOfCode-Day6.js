@@ -12,35 +12,45 @@ do {
     let categories = ["1-Fruits & Veggies:", "2-Dairy & Meat:", "3-Frozen & Shelflife Food:", "4-Bakery & Snacks:", "5-Cleaning & Misc:"];
     let continueAdding = true;
 
-    while (continueAdding) {
-        productChoice = prompt("What would you like to add to your shopping list?");
 
-        let categoryChoice = prompt("What category would you like to add this item?\nChoose by the number:\n\n" + categories.join("\n"));
-        const categoryNumber = Number.parseInt(categoryChoice);
-        categoryShoppingList[categoryNumber - 1].push(productChoice);
+    do {
 
-        do {
+        nextStepChoice = Number.parseInt(prompt("What would you like to do now?\n\n1-Add\n2-Remove\n3-Show my list\n4-I'm done!"));
 
-            nextStepChoice = Number.parseInt(prompt("What would you like to do now?\n\n1-Add\n2-Remove\n3-Show my list\n4-I'm done!"));
+        if (nextStepChoice === 1) {
+            productChoice = prompt("What would you like to add to your shopping list?");
 
-            if (nextStepChoice > 4) {
-                alert("Please enter a valid number");
-            } else if (nextStepChoice === 2) {
-                questionRemove = prompt("What item would you like to remove?");
+            let categoryChoice = prompt("What category would you like to add this item?\nChoose by the number:\n\n" + categories.join("\n"));
+            const categoryNumber = Number.parseInt(categoryChoice);
+            categoryShoppingList[categoryNumber - 1].push(productChoice);
 
-                let categoryChoice = prompt("What category would you like to remove this item?\nChoose by the number:\n\n" + categories.join("\n"));
-                const categoryNumber = Number.parseInt(categoryChoice);
-                categoryShoppingList[categoryNumber - 1].splice(categories.indexOf(questionRemove), 1);
+        } else if (nextStepChoice === 2) {
+            questionRemove = prompt("What item would you like to remove?");
 
-                console.log(categoryShoppingList);
-            } else if (nextStepChoice === 4) {
-                alert("Let's see your list then");
-                continueAdding = false;
+            let categoryChoice = prompt("What category would you like to remove this item?\nChoose by the number:\n\n" + categories.join("\n"));
+            const categoryNumber = Number.parseInt(categoryChoice);
+            categoryShoppingList[categoryNumber - 1].splice(categories.indexOf(questionRemove), 1);
+
+        } else if(nextStepChoice === 3){
+            let showMyList = '';
+
+            for (let i = 0; i < categories.length; i++) {
+                showMyList = showMyList + categories[i] + "\n" + categoryShoppingList[i].join(", ") + "\n\n";
             }
 
+            alert ("Here's a preview of your shopping list!:\n\n" + showMyList);
 
-        } while (nextStepChoice > 4)
-    }
+        } else if (nextStepChoice === 4) {
+            alert("Let's see your list then");
+            continueAdding = false;
+
+        } else if (nextStepChoice > 4) {
+            alert("Please enter a valid number");
+        }
+
+
+    } while (nextStepChoice != 4)
+
 
     let myShoppingList = '';
 
