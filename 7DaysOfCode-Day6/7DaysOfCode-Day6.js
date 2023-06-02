@@ -2,17 +2,15 @@ alert("Let's go shopping!");
 let productChoice;
 let nextStepChoice;
 let questionRemove;
-let removedProduct;
-let listRemoved;
 let showMyList;
+
 
 
 do {
     let categoryShoppingList = [[], [], [], [], []];
     let categories = ["1-Fruits & Veggies:", "2-Dairy & Meat:", "3-Frozen & Shelflife Food:", "4-Bakery & Snacks:", "5-Cleaning & Misc:"];
-    let continueAdding = true;
-
-
+    let listRemoved = [];
+    
     do {
 
         nextStepChoice = Number.parseInt(prompt("What would you like to do now?\n\n1-Add\n2-Remove\n3-Show my list\n4-I'm done!"));
@@ -31,19 +29,20 @@ do {
             const categoryNumber = Number.parseInt(categoryChoice);
             categoryShoppingList[categoryNumber - 1].splice(categories.indexOf(questionRemove), 1);
 
+            listRemoved.push(questionRemove);
+            
         } else if(nextStepChoice === 3){
-            let showMyList = '';
+            showMyList = '';         
 
             for (let i = 0; i < categories.length; i++) {
                 showMyList = showMyList + categories[i] + "\n" + categoryShoppingList[i].join(", ") + "\n\n";
             }
 
-            alert ("Here's a preview of your shopping list!:\n\n" + showMyList);
+            alert ("Here's a preview of your shopping list!:\n\n" + showMyList + "Removed items:\n" + listRemoved.join("\n"));
 
         } else if (nextStepChoice === 4) {
             alert("Let's see your list then");
-            continueAdding = false;
-
+            
         } else if (nextStepChoice > 4) {
             alert("Please enter a valid number");
         }
@@ -75,6 +74,6 @@ do {
     //alert(str);
 
 
-    alert("Here's your shopping list!:\n\n" + myShoppingList);
+    alert("Here's your shopping list!:\n\n" + myShoppingList + "Removed items:\n" + listRemoved.join("\n"));
 
 } while (nextStepChoice === "1")
